@@ -74,7 +74,7 @@ function App() {
                 {collectionDialog()}
             </Box>;
         }
-        return <CollectionMap collection={collection} viewerPath="https://collections-uat.library.yale.edu/uv.html#?manifest=" />;
+        return <CollectionMap collection={collection} viewerPath="./uv.html#?manifest=" />;
     }
 
     return (
