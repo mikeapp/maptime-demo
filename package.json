@@ -15,14 +15,14 @@
     "react-scripts": "5.0.1",
     "typescript": "^4.6.4",
     "web-vitals": "^2.1.4",
-    "iiif-maptime": "0.1.4"
+    "iiif-maptime": "0.1.10"
   },
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "docs": "react-scripts build && mv ./build ./docs && git add docs"
+    "docs": "git rm -rf docs && react-scripts build && mv build docs && git add docs"
   },
   "eslintConfig": {
     "extends": [
