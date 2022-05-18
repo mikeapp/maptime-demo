@@ -32,7 +32,11 @@ const CollectionInputDialog = ({uri, setUri, open, updateState}:CollectionInputD
 
     return (
         <div>
-            <Dialog open={open} onClose={handleCancel} fullWidth={true}>
+            <Dialog open={open}
+                    disableScrollLock
+                    onClose={handleCancel}
+                    disableRestoreFocus
+                    fullWidth={true}>
                 <DialogTitle>Collection Address</DialogTitle>
                 <DialogContent>
                     <DialogContentText>

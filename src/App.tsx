@@ -74,6 +74,7 @@ function App() {
 
     return (
         <>
+            <CollectionInputDialog uri={collectionURI} setUri={setCollectionURI} open={showDialog} updateState={setShowDialog}/>
             <AppBar position="relative">
                 <Toolbar sx={{backgroundColor:"dimgray"}}>
                     <Typography variant="h5" component="h1" p={2}  sx={{ flexGrow: 1 }}>{collectionLabel}</Typography>
@@ -83,7 +84,6 @@ function App() {
                 </Toolbar>
             </AppBar>
             {collectionMap()}
-            <CollectionInputDialog uri={collectionURI} setUri={setCollectionURI} open={showDialog} updateState={setShowDialog}/>
         </>
     );
 
