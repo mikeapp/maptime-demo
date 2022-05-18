@@ -1,9 +1,10 @@
 import React, {useEffect, useState} from 'react';
 import './App.css';
 import {Collection} from "iiif-maptime/iiif/Collection";
-import {Alert, AppBar, Box, LinearProgress, Toolbar, Typography} from "@mui/material";
+import {Alert, AppBar, Box, LinearProgress, Toolbar, Typography, Button} from "@mui/material";
 import CollectionMap from "iiif-maptime/components/CollectionMap";
 import CollectionInputDialog from "./CollectionInputDialog";
+import OpenInBrowserIcon from '@mui/icons-material/OpenInBrowser';
 
 function App() {
     const APP_NAME = "Collection Viewer";
@@ -12,17 +13,10 @@ function App() {
     const [collectionLabel, setCollectionLabel] = useState<any | null>(APP_NAME);
     const [progress, setProgess] = useState<number>(0);
     const [errorMessage, setErrorMessage] = useState<string | null>(null);
-
-    const collectionDialog = () => (
-        <Box ml={5}>
-            <CollectionInputDialog uri={collectionURI} setUri={setCollectionURI} />
-        </Box>
-    );
-
+    const [showDialog, setShowDialog] = useState(false);
     const updateProgress = (percent:number) => {
         setProgess(percent);
     }
-
     const execute = async (options = {}) => {
         setErrorMessage(null);
         if (collectionURI !== null) {
@@ -47,14 +41,12 @@ function App() {
             return <Box alignContent="center" width="100%">
                     <Alert variant="filled" severity="error">An error has occurred</Alert>
                     <Typography m={5}>{errorMessage}</Typography>
-                    {collectionDialog()}
                 </Box>;
         } else if (collectionURI === null) {
             return (
                 <Box alignContent="center" width="100%">
                     <Alert variant="filled" severity="warning">No collection was specified</Alert>
                     <Typography m={5}>To view a collection, please provide its URL.</Typography>
-                    {collectionDialog()}
                 </Box>
             );
         } else if (collection === null) {
@@ -71,20 +63,27 @@ function App() {
             return <Box alignContent="center" width="100%">
                 <Alert variant="filled" severity="warning">The collection is empty.</Alert>
                 <Typography m={5}>The collection contains no objects.</Typography>
-                {collectionDialog()}
             </Box>;
         }
         return <CollectionMap collection={collection} viewerPath="./uv.html#?manifest=" />;
+    }
+
+    const showCollectionDialog = () => {
+        setShowDialog(true);
     }
 
     return (
         <>
             <AppBar position="relative">
                 <Toolbar sx={{backgroundColor:"dimgray"}}>
-                    <Typography variant="h5" component="h1" p={2}>{collectionLabel}</Typography>
+                    <Typography variant="h5" component="h1" p={2}  sx={{ flexGrow: 1 }}>{collectionLabel}</Typography>
+                    <Button variant="contained"
+                            startIcon={<OpenInBrowserIcon/>}
+                            onClick={() => showCollectionDialog()}>Open a collection</Button>
                 </Toolbar>
             </AppBar>
             {collectionMap()}
+            <CollectionInputDialog uri={collectionURI} setUri={setCollectionURI} open={showDialog} updateState={setShowDialog}/>
         </>
     );
 

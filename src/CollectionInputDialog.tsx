@@ -10,31 +10,29 @@ import DialogTitle from '@mui/material/DialogTitle';
 type CollectionInputDialogProps = {
     uri: string | null;
     setUri: (uri:string|null) => void;
+    open: boolean;
+    updateState: (open:boolean) => void;
 }
 
-const CollectionInputDialog = ({uri, setUri}:CollectionInputDialogProps) => {
-    const [open, setOpen] = useState(false);
+const CollectionInputDialog = ({uri, setUri, open, updateState}:CollectionInputDialogProps) => {
     const [tempUri, setTempUri] = useState(uri || "https://mikeapp.github.io/manifest-fixtures/collection/test.json");
 
     const handleClickOpen = () => {
-        setOpen(true);
+        updateState(true);
     };
 
     const handleView = () => {
         setUri(tempUri);
-        setOpen(false);
+        updateState(false);
     };
 
     const handleCancel = () => {
-        setOpen(false);
+        updateState(false);
     };
 
     return (
         <div>
-            <Button variant="contained" onClick={handleClickOpen}>
-                View a collection
-            </Button>
-            <Dialog open={open} onClose={handleCancel}>
+            <Dialog open={open} onClose={handleCancel} fullWidth={true}>
                 <DialogTitle>Collection Address</DialogTitle>
                 <DialogContent>
                     <DialogContentText>
