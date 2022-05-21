@@ -1,8 +1,7 @@
 import React, {useEffect, useState} from 'react';
 import './App.css';
-import {Collection} from "iiif-maptime/iiif/Collection";
+import {Collection, CollectionMap} from "iiif-maptime";
 import {Alert, AppBar, Box, LinearProgress, Toolbar, Typography, Button} from "@mui/material";
-import CollectionMap from "iiif-maptime/components/CollectionMap";
 import CollectionInputDialog from "./CollectionInputDialog";
 import OpenInBrowserIcon from '@mui/icons-material/OpenInBrowser';
 
