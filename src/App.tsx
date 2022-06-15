@@ -1,13 +1,13 @@
 import React, {useEffect, useState} from 'react';
 import './App.css';
-import {Collection, CollectionMap} from "iiif-maptime";
+import {Collection, CollectionMap, Manifest} from "iiif-maptime";
 import {Alert, AppBar, Box, LinearProgress, Toolbar, Typography, Button} from "@mui/material";
 import CollectionInputDialog from "./CollectionInputDialog";
 import OpenInBrowserIcon from '@mui/icons-material/OpenInBrowser';
 
 function App() {
     const APP_NAME = "Collection Viewer";
-    const [collectionURI, setCollectionURI] = useState(new URLSearchParams(window.location.search).get("collection") || null)
+    const [collectionURI, setCollectionURI] = useState(new URLSearchParams(window.location.search).get("iiif-content") || null)
     const [collection, setCollection] = useState<Collection | null>(null);
     const [collectionLabel, setCollectionLabel] = useState<any | null>(APP_NAME);
     const [progress, setProgess] = useState<number>(0);
@@ -22,11 +22,12 @@ function App() {
             setCollectionLabel(APP_NAME);
             const c = new Collection(collectionURI);
             c.fetch(updateProgress).then(() => {
+                if (!c.iiif?.isCollection()) throw("IIIF resource is not a collection");
                 const l = c.iiif?.getDefaultLabel();
                 setCollection(c);
                 setCollectionLabel(l);
             }).catch((e) => {
-                setErrorMessage("An error has occurred when loading the collection or one of its objects.  Please check the collection URL.");
+                setErrorMessage("An error has occurred when loading the collection or one of its objects.  Please verify the collection URL.");
             });
         }
     }

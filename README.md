@@ -10,10 +10,10 @@ You can view a collection directly by providing its URI in the `collection` para
 
 With a map and timeline:
 
-https://mikeapp.github.io/maptime-demo/?collection=https://mikeapp.github.io/manifest-fixtures/collection/test.json
+https://mikeapp.github.io/maptime-demo/?iiif-content=https://mikeapp.github.io/manifest-fixtures/collection/test.json
 
 Without map or timeline:
 
-https://mikeapp.github.io/maptime-demo/?collection=https://iiif.library.utoronto.ca/presentation/v2/collections/anatomia:root
+https://mikeapp.github.io/maptime-demo/?iiif-content=https://iiif.library.utoronto.ca/presentation/v2/collections/anatomia:root
 
-https://mikeapp.github.io/maptime-demo/?collection=https://www.e-codices.unifr.ch/metadata/iiif/collection/aev.json
+https://mikeapp.github.io/maptime-demo/?iiif-content=https://www.e-codices.unifr.ch/metadata/iiif/collection/aev.json
