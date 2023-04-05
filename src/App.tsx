@@ -22,11 +22,12 @@ function App() {
             setCollectionLabel(APP_NAME);
             const c = new Collection(collectionURI);
             c.fetch(updateProgress).then(() => {
-                if (!c.iiif?.isCollection()) throw("IIIF resource is not a collection");
-                const l = c.iiif?.getDefaultLabel();
+                if (c.collection?.type !== "Collection") throw("IIIF resource is not a collection");
+                const l = c.label();
                 setCollection(c);
                 setCollectionLabel(l);
             }).catch((e) => {
+                console.log(e);
                 setErrorMessage("An error has occurred when loading the collection or one of its objects.  Please verify the collection URL.");
             });
         }
